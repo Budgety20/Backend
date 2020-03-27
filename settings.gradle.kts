@@ -12,4 +12,4 @@ pluginManagement {
 		}
 	}
 }
-rootProject.name = "service"
+rootProject.name = "budgety"

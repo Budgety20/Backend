@@ -1,4 +1,4 @@
-package com.budgety.service
+package com.budgety
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
