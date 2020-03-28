@@ -1,8 +1,7 @@
-package com.budget.adapters
+package com.budgety.adapters
 
-import com.budget.service.model.Category
+import com.budgety.service.model.Category
 import com.mongodb.*
-import org.bson.BsonDocument
 import org.bson.Document
 import org.springframework.stereotype.Service
 

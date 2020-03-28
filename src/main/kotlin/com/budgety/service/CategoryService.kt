@@ -1,7 +1,7 @@
-package com.budget.service
+package com.budgety.service
 
-import com.budget.adapters.MongoDbAdapter
-import com.budget.service.model.Category
+import com.budgety.adapters.MongoDbAdapter
+import com.budgety.service.model.Category
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

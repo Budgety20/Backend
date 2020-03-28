@@ -1,8 +1,8 @@
-package com.budget.controller
+package com.budgety.controller
 
-import com.budget.service.CategoryService
-import com.budget.service.model.Category as CategoryModel
-import com.budget.dto.Category as CategoryDto
+import com.budgety.service.CategoryService
+import com.budgety.service.model.Category as CategoryModel
+import com.budgety.dto.Category as CategoryDto
 import org.junit.jupiter.api.Test
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach

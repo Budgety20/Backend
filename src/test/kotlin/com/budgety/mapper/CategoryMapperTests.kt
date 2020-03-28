@@ -1,8 +1,8 @@
-package com.budget.mapper
+package com.budgety.mapper
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
-import com.budget.service.model.Category as CategoryModel
+import com.budgety.service.model.Category as CategoryModel
 import org.assertj.core.api.Assertions.assertThat
 
 @SpringBootTest

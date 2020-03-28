@@ -1,7 +1,7 @@
-package com.budget.mapper
+package com.budgety.mapper
 
-import com.budget.dto.Category as CategoryDto
-import com.budget.service.model.Category as CategoryModel
+import com.budgety.dto.Category as CategoryDto
+import com.budgety.service.model.Category as CategoryModel
 
 object CategoryMapper {
     fun map(categries: List<CategoryModel>) : List<CategoryDto>{
