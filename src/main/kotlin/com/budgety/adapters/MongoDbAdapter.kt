@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 class MongoDbAdapter {
     fun getMongoClient() : MongoClient {
         var mongoClient: MongoClient? = null
-        var uri = MongoClientURI("mongodb+srv://admin:admin_pswd@budgety-alatv.mongodb.net/test?retryWrites=true&w=majority")
+        var uri = MongoClientURI("mongodb+srv://read-only:xwupN42IF64hIxL8@budgety-alatv.mongodb.net")
         try{
             mongoClient = MongoClient(uri)
         }catch (e: MongoException){
@@ -39,10 +39,6 @@ class MongoDbAdapter {
         var code = asMap.getValue("Code") as String
         var name = asMap.getValue("Name") as String
         return Category(code,name);
-    }
-
-    fun getCredentials() : MongoCredential {
-        return MongoCredential.createCredential("admin", "Budgety", "admin_pswd".toCharArray())
     }
 }
 
