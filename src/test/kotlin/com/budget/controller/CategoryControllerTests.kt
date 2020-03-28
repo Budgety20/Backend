@@ -1,13 +1,10 @@
-package com.budgety
+package com.budget.controller
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class ServiceApplicationTests {
-
-	@Test
-	fun contextLoads() {
-	}
-
+class CategoryControllerTests {
+    @Test
+    fun  
 }
