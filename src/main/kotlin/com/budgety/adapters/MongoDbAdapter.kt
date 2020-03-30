@@ -13,26 +13,27 @@ import org.springframework.stereotype.Service
 class MongoDbAdapter(@Autowired val appConfig: ApplicationConfig) {
 
     fun getMongoClient() : MongoClient {
-        var mongoClient: MongoClient? = null
-        var uri = appConfig?.mongoUri?.let { MongoClientURI(it) }
-        try{
-            mongoClient = uri?.let { MongoClient(it) }
-        }catch (e: MongoException){
-            e.printStackTrace()
-        }
-        return mongoClient!!;
+        var uri = MongoClientURI("mongodb+srv://read-only:xwupN42IF64hIxL8@budgety-alatv.mongodb.net")
+        return MongoClient(uri)
     }
 
     fun getAllCategory(): List<Category> {
-        var mongoClient = getMongoClient();
-        var database = appConfig.databaseName?.let { mongoClient.getDatabase(it) };
-        var collection = database?.getCollection("Category", Document::class.java);
-
+        var mongoClient: MongoClient? = null
         val result = ArrayList<Category>()
-
-        collection?.find()?.forEach{
-            val category: Category = mongoDocumentToMap(it)
-            result.add(category);
+        try {
+            mongoClient = getMongoClient();
+            var database = mongoClient.getDatabase("Budgety");
+            var collection = database.getCollection("Category", Document::class.java);
+            collection.find()
+                    .forEach {
+                        val category: Category = mongoDocumentToMap(it)
+                        result.add(category);
+                    }
+        } catch (e: Exception){
+            e.printStackTrace()
+        }
+        finally {
+            mongoClient!!.close();
         }
 
         return result;
