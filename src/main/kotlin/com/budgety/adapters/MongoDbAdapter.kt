@@ -8,28 +8,28 @@ import org.springframework.stereotype.Service
 @Service
 class MongoDbAdapter {
     fun getMongoClient() : MongoClient {
-        var mongoClient: MongoClient? = null
         var uri = MongoClientURI("mongodb+srv://read-only:xwupN42IF64hIxL8@budgety-alatv.mongodb.net")
-        try{
-            mongoClient = MongoClient(uri)
-        }catch (e: MongoException){
-            e.printStackTrace()
-        }
-        return mongoClient!!;
+        return MongoClient(uri)
     }
 
     fun getAllCategory(): List<Category> {
-        var mongoClient = getMongoClient();
-        var database = mongoClient.getDatabase("Budgety");
-        var collection = database.getCollection("Category", Document::class.java);
-
+        var mongoClient: MongoClient? = null
         val result = ArrayList<Category>()
-
-        collection.find()
-                .forEach{
-                    val category: Category = mongoDocumentToMap(it)
-                    result.add(category);
-                }
+        try {
+            mongoClient = getMongoClient();
+            var database = mongoClient.getDatabase("Budgety");
+            var collection = database.getCollection("Category", Document::class.java);
+            collection.find()
+                    .forEach {
+                        val category: Category = mongoDocumentToMap(it)
+                        result.add(category);
+                    }
+        } catch (e: Exception){
+            e.printStackTrace()
+        }
+        finally {
+            mongoClient!!.close();
+        }
 
         return result;
     }
