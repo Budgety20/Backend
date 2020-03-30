@@ -4,7 +4,6 @@ import com.budgety.ApplicationConfig
 import com.budgety.service.model.Category
 import com.mongodb.MongoClient
 import com.mongodb.MongoClientURI
-import com.mongodb.MongoException
 import org.bson.Document
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -12,38 +11,37 @@ import org.springframework.stereotype.Service
 @Service
 class MongoDbAdapter(@Autowired val appConfig: ApplicationConfig) {
 
-    fun getMongoClient() : MongoClient {
-        var uri = MongoClientURI("mongodb+srv://read-only:xwupN42IF64hIxL8@budgety-alatv.mongodb.net")
-        return MongoClient(uri)
+    fun getMongoClient() : MongoClient? {
+        val uri = appConfig.mongoUri?.let { MongoClientURI(it) }
+        return uri?.let { MongoClient(it) }
     }
 
     fun getAllCategory(): List<Category> {
         var mongoClient: MongoClient? = null
         val result = ArrayList<Category>()
         try {
-            mongoClient = getMongoClient();
-            var database = mongoClient.getDatabase("Budgety");
-            var collection = database.getCollection("Category", Document::class.java);
-            collection.find()
-                    .forEach {
-                        val category: Category = mongoDocumentToMap(it)
-                        result.add(category);
-                    }
+            mongoClient = getMongoClient()
+            val database = appConfig.databaseName?.let { mongoClient?.getDatabase(it) }
+            val collection = database?.getCollection("Category", Document::class.java)
+            collection?.find()?.forEach {
+                val category: Category = mongoDocumentToMap(it)
+                result.add(category)
+            }
         } catch (e: Exception){
             e.printStackTrace()
         }
         finally {
-            mongoClient!!.close();
+            mongoClient!!.close()
         }
 
-        return result;
+        return result
     }
 
     fun mongoDocumentToMap(document: Document) : Category {
-        val asMap: MutableMap<String,Any> = document.toMutableMap();
-        var code = asMap.getValue("Code") as String
-        var name = asMap.getValue("Name") as String
-        return Category(code,name);
+        val asMap: MutableMap<String,Any> = document.toMutableMap()
+        val code = asMap.getValue("Code") as String
+        val name = asMap.getValue("Name") as String
+        return Category(code,name)
     }
 }
 
