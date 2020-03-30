@@ -1,17 +1,22 @@
 package com.budgety.adapters
 
+import com.budgety.ApplicationConfig
 import com.budgety.service.model.Category
-import com.mongodb.*
+import com.mongodb.MongoClient
+import com.mongodb.MongoClientURI
+import com.mongodb.MongoException
 import org.bson.Document
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class MongoDbAdapter {
+class MongoDbAdapter(@Autowired val appConfig: ApplicationConfig) {
+
     fun getMongoClient() : MongoClient {
         var mongoClient: MongoClient? = null
-        var uri = MongoClientURI("mongodb+srv://read-only:xwupN42IF64hIxL8@budgety-alatv.mongodb.net")
+        var uri = appConfig?.mongoUri?.let { MongoClientURI(it) }
         try{
-            mongoClient = MongoClient(uri)
+            mongoClient = uri?.let { MongoClient(it) }
         }catch (e: MongoException){
             e.printStackTrace()
         }
@@ -20,16 +25,15 @@ class MongoDbAdapter {
 
     fun getAllCategory(): List<Category> {
         var mongoClient = getMongoClient();
-        var database = mongoClient.getDatabase("Budgety");
-        var collection = database.getCollection("Category", Document::class.java);
+        var database = appConfig.databaseName?.let { mongoClient.getDatabase(it) };
+        var collection = database?.getCollection("Category", Document::class.java);
 
         val result = ArrayList<Category>()
 
-        collection.find()
-                .forEach{
-                    val category: Category = mongoDocumentToMap(it)
-                    result.add(category);
-                }
+        collection?.find()?.forEach{
+            val category: Category = mongoDocumentToMap(it)
+            result.add(category);
+        }
 
         return result;
     }
