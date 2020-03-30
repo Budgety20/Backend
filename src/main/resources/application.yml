@@ -1,5 +1,0 @@
-spring:
-  profiles: test
-name: budgety-test
-mongo-uri: mongodb+srv://read-only:xwupN42IF64hIxL8@budgety-alatv.mongodb.net
-database-name: Budgety
