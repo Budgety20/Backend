@@ -1,18 +1,17 @@
 package com.budgety.mapper
 
-import com.budgety.dto.CategoryDto
-import com.budgety.service.model.Category;
-import java.util.stream.Collectors
+import com.budgety.dto.Category as CategoryDto
+import com.budgety.service.model.Category as CategoryModel
 
-object  CategoryMapper {
-     fun map(categories: List<Category>): List<CategoryDto>{
-        return categories.map{map(it)}
-                .toList();
+object CategoryMapper {
+    fun map(categries: List<CategoryModel>) : List<CategoryDto>{
+        return categries.map{map(it)}
+                .toList()
     }
 
-    private fun map(category : Category) : CategoryDto{
-        var categoryDto =  CategoryDto(category.code,category.name)
-        categoryDto.description = category.description
+    private fun map(categoryModel: CategoryModel) : CategoryDto {
+        var categoryDto = CategoryDto(categoryModel.code, categoryModel.name)
+        categoryDto.description = categoryModel.description
         return categoryDto
     }
 }

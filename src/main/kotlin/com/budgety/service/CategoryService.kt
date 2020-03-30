@@ -1,14 +1,17 @@
 package com.budgety.service
 
-import com.budgety.adapter.MongoDbAdapter
-import com.budgety.adapter.dao.CategoryDAO
+import com.budgety.adapters.MongoDbAdapter
 import com.budgety.service.model.Category
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.util.*
+
 
 @Service
-class CategoryService(val mongoDbAdapter: MongoDbAdapter) {
-    fun getCategory(): List<Category> {
-       return  mongoDbAdapter.getAll();
+class CategoryService(@Autowired val mongoDbAdapter: MongoDbAdapter) {
+
+    fun getAllCategories() : List<Category> {
+
+        return mongoDbAdapter.getAllCategory();
+
     }
 }
