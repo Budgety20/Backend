@@ -3,5 +3,5 @@ spring:
   data:
     mongodb:
       database: Budgety
-      uri: mongodb+srv://raghav:1234@budgety-alatv.mongodb.net
+      uri: mongodb+srv://${MONGO_USER}:${MONGO_PSWD}@budgety-alatv.mongodb.net
       port: 27017
