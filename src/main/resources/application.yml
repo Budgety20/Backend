@@ -1,0 +1,6 @@
+spring:
+  profiles: dev
+  data:
+    mongodb:
+      database: Budgety
+      uri: mongodb+srv://raghav:1234@budgety-alatv.mongodb.net
