@@ -10,6 +10,6 @@ import org.springframework.stereotype.Service
 class CategoryService(@Autowired val mongoDbAdapter: MongoDbAdapter) {
 
     fun getAllCategories() : List<Category> {
-        return mongoDbAdapter.getAllCategory();
+        return mongoDbAdapter.getAllCategory()
     }
 }
