@@ -1,28 +1,34 @@
 package com.budgety.controller
 
+import com.budgety.BudgetApplication
+import com.budgety.adapters.MongoDbAdapter
 import com.budgety.service.CategoryService
-import com.budgety.service.model.Category as CategoryModel
-import com.budgety.dto.Category as CategoryDto
-import org.junit.jupiter.api.Test
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
-import org.mockito.Mockito
+import org.junit.jupiter.api.Test
+import org.mockito.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.boot.test.web.client.getForEntity
 import org.springframework.http.HttpStatus
+import com.budgety.dto.Category as CategoryDto
+import com.budgety.service.model.Category as CategoryModel
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class CategoryControllerTests(@Autowired val restTemplate: TestRestTemplate) {
+@SpringBootTest(classes = arrayOf(BudgetApplication::class) ,
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class CategoryControllerTests() {
+
+    @Autowired
+    lateinit var restTemplate: TestRestTemplate
 
     @MockBean
-    lateinit var categoryService: CategoryService
+    lateinit var mongoDbAdapter: MongoDbAdapter
 
     @BeforeEach
     fun setUp(){
-        Mockito.`when`(categoryService.getAllCategories())
+        Mockito.`when`(mongoDbAdapter.getAllCategory())
                 .thenReturn(getDummyCategory())
     }
 

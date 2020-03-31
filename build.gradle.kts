@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-	implementation("org.mongodb:mongo-java-driver:3.12.2")
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")

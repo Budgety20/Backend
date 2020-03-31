@@ -1,5 +1,6 @@
 spring:
-  profiles: test
-name: budgety-test
-mongo-uri: mongodb+srv://read-only:xwupN42IF64hIxL8@budgety-alatv.mongodb.net
-database-name: Budgety
+  profiles: dev
+  data:
+    mongodb:
+      database: Budgety
+      uri: mongodb+srv://raghav:1234@budgety-alatv.mongodb.net
