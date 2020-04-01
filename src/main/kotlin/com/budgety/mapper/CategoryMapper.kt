@@ -14,4 +14,10 @@ object CategoryMapper {
         categoryDto.description = categoryModel.description
         return categoryDto
     }
+
+    fun map(categoryDto: CategoryDto) : CategoryModel {
+        var categoryModel = CategoryModel(categoryDto.code, categoryDto.name)
+        categoryModel.description = categoryDto.description
+        return categoryModel
+    }
 }

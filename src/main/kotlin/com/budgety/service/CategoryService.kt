@@ -15,4 +15,8 @@ class CategoryService() {
     fun getAllCategories() : List<Category> {
         return mongoDbAdapter.getAllCategory()
     }
+
+    fun createCategory(category: Category) {
+        return mongoDbAdapter.createCategory(category)
+    }
 }
